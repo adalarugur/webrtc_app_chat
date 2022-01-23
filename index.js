@@ -1,7 +1,6 @@
 const app  = require("express")();
 const server = require("http").createServer(app);  
 const cors = require("cors");
-const { Socket } = require("dgram");
 
 const io = require("socket.io")(server,{
     cors: {
@@ -28,7 +27,7 @@ io.on('connection',(socket)=>{
     });
 
     socket.on("calluser",({userToCall, signalData,from,name})=>{
-        
+
     });
 
 });
