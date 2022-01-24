@@ -8,9 +8,13 @@ const socket = io('http://localhost.com:5000');
 const ContextProvider = ({ children }) => {
     const [state, setStream] = useState(null)
     const [me, setMe] = useState('');
-    const [call, setCall] = useState = null;
+    const [call, setCall] = useState(null);
+    const [callAccepted, setCallAccepted] = useState(false);
+    const [callEnded, setCallEnded] = useState(false);
+
     //reference = video on iframe
     const myVideo = useRef();
+    const userVideo = useRef();
 
 
     //video call funcs
@@ -34,7 +38,18 @@ const ContextProvider = ({ children }) => {
     );
 
     const answerCall = () => {
+        setCallAccepted(true)
 
+        const peer = new Peer({initiator: false, trickle: false, stream });
+
+        peer.on('signal',(data) =>{
+            socket.emit('answercall',{signal: data, to: call.from});
+        } );
+
+        peer.on('stream', (currentStream)=> {
+            //other user video stream 
+            userVideo.current.srcObject = currentStream;
+        });
     }
 
     const callUser = () => {
