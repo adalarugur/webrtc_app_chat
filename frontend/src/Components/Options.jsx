@@ -1,5 +1,5 @@
-import React from 'react'
-import { Buttom, Text, Grid, Typography, Container, Paper, Button} from '@material-ui/core';
+import React, { useState, useContext } from 'react';
+import { Button, TextField, Grid, Typography, Container, Paper} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { Assignment, Phone, PhoneDisabled } from '@material-ui/icons';
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Options = ({children}) => {
     
-    const {me, callAccepted, name, setName, leaveCall, callUser} = useContext(SocketContext);
+    const {me, callAccepted, name, setName,callEnded, leaveCall, callUser} = useContext(SocketContext);
     const [idToCall, setIdToCall] = useState('');
     const classes = useStyles();
 
@@ -53,7 +53,7 @@ const Options = ({children}) => {
                         <Typography gutterBottom variant="h6"> Accoun Info </Typography>
                         <TextField label="Name" value={name} onChange={(e) => setName(e.target.value) } fullWidth ></TextField>
                         <CopyToClipboard text={me} className={classes.margin}>
-                            <Button variant="contained" color="primary" fullWidth startIcon={<Assignemnt fontSize="large"/>} >
+                            <Button variant="contained" color="primary" fullWidth startIcon={<Assignment fontSize="large"/>} >
                                     Copy your ID
                             </Button>
                         </CopyToClipboard>
