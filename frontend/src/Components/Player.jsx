@@ -35,9 +35,9 @@ const Player = () => {
                 <Paper className={classes.paper} >
                     <Grid item xs={12} md={6}>
                         <Typography variant="h5" gutterBottom>
-                            {/*name || 'Name'*/}
+                            {name || 'Name'}
                         </Typography>
-                        <video playsInline muted ref={null} autoPlay className={classes.video}></video>
+                        <video playsInline muted ref={myVideo} autoPlay className={classes.video}></video>
                     </Grid>
                 </Paper>)}
                 {/*my video */}
@@ -47,7 +47,7 @@ const Player = () => {
                         <Paper className={classes.paper} >
                             <Grid item xs={12} md={6}>
                                 <Typography variant="h5" gutterBottom>
-                                    {/*call.name || 'Name'*/}
+                                    {call.name || 'Name'}
                                 </Typography>
                                 <video playsInline muted ref={null} autoPlay className={classes.video}></video>
                             </Grid>

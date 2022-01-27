@@ -3,15 +3,16 @@ import { io } from 'socket.io-client';
 import { Peer } from 'simple-peer';
 
 const SocketContext = createContext();
-const socket = io('http://localhost.com:5000');
+const socket = io('https://warm-wildwood-81069.herokuapp.com');
 
 const ContextProvider = ({ children }) => {
+    const [stream, setStream] = useState(null);   
+    const [me, setMe] = useState(''); 
+    const [call, setCall] = useState({});    
     const [callAccepted, setCallAccepted] = useState(false);
     const [callEnded, setCallEnded] = useState(false);
-    const [stream, setStream] = useState();
     const [name, setName] = useState('');
-    const [call, setCall] = useState({});
-    const [me, setMe] = useState('');
+   
     //reference = video on iframe
     const myVideo = useRef();
     const userVideo = useRef();
@@ -23,9 +24,13 @@ const ContextProvider = ({ children }) => {
 
         navigator.mediaDevices.getUserMedia({ video: true, audio: true })
             .then((currentStream) => {
+                debugger;
                 setStream(currentStream);
+                console.log('media stream :', currentStream);             
+               
 
-                myVideo.current.srcObject = currentStream;
+                    myVideo.current.srcObject = currentStream;                
+                   
             });
 
         socket.on('me', (id) => setMe(id));
@@ -84,7 +89,7 @@ const ContextProvider = ({ children }) => {
         setCallEnded(true);
 
         connectionRef.current.destroy();
-
+        no-undef
         window.location.reload();
 
     }
