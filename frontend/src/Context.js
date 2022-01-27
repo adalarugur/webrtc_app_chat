@@ -3,7 +3,7 @@ import { io } from 'socket.io-client';
 import { Peer } from 'simple-peer';
 
 const SocketContext = createContext();
-const socket = io('https://warm-wildwood-81069.herokuapp.com');
+const socket = io('https://localhost:5000');
 
 const ContextProvider = ({ children }) => {
     const [stream, setStream] = useState(null);   
